@@ -8,7 +8,8 @@
     "build": "node scripts/build.mjs",
     "dev": "npm run build && npx --yes serve dist -l 3000",
     "preview": "npm run build && python3 -m http.server 3000 -d dist",
-    "test": "node scripts/test.mjs"
+    "test": "node scripts/test.mjs",
+    "test:article-packs": "node scripts/test-article-packs.mjs"
   },
   "engines": {
     "node": ">=20"

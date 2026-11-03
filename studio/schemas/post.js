@@ -31,7 +31,10 @@ export const postType = defineType({
       {type:'image',options:{hotspot:true},fields:[
         {name:'alt',title:'Alt text',type:'string'},
         {name:'caption',title:'Photo caption',type:'string'}
-      ]}
+      ]},
+      {type:'object',name:'sevenTip',title:'Seven Travel Tip',fields:[
+        {name:'text',type:'text',title:'Local travel tip',rows:3,validation:Rule=>Rule.required()}
+      ],preview:{select:{title:'text'},prepare:({title})=>({title:title||'Seven Travel Tip',subtitle:'Local travel tip'})}}
     ]})
   ],
   preview: {

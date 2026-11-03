@@ -1,12 +1,14 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { loadArticlePacks, mergeArticleSources } from './article-packs.mjs';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const site = JSON.parse(await fs.readFile(path.join(root,'content/site.json'), 'utf8'));
 const base = (process.env.PUBLIC_BASE_PATH || site.basePath).replace(/\/$/, '');
 const domain = (process.env.PUBLIC_SITE_URL || site.publicDomain).replace(/\/$/, '');
 const isLive = process.env.SITE_LIVE === 'true';
-const source = (process.env.SANITY_PROJECT_ID || '').trim() ? 'Sanity CMS' : 'example editorial content';
+const hasSanity = Boolean((process.env.SANITY_PROJECT_ID || '').trim());
+const source = hasSanity ? 'Sanity CMS + article packages' : 'article packages / demo';
 const output = path.join(root,'dist');
 const siteRoot = path.join(output,base.replace(/^\//,''));
 await fs.rm(output, {recursive:true,force:true});
@@ -23,7 +25,7 @@ const postUrl = post => u(`guides/${post.slug}`);
 const imageUrl = post => post.image?.startsWith('/assets/') ? asset(post.image.slice('/assets/'.length)) : (post.image || asset('hero-vietnam.svg'));
 
 async function readPosts(){
-  if(!process.env.SANITY_PROJECT_ID) return JSON.parse(await fs.readFile(path.join(root,'content/demo-posts.json'),'utf8'));
+  if(!hasSanity) return []; 
   const id=process.env.SANITY_PROJECT_ID.trim();
   const ds=process.env.SANITY_DATASET || 'production';
   const version=process.env.SANITY_API_VERSION || '2026-03-01';
@@ -43,7 +45,13 @@ async function readPosts(){
     body:p.body || []
   }));
 }
-const posts=(await readPosts()).filter(x=>x.slug && x.title).sort((a,b)=> new Date(b.date)-new Date(a.date));
+const sanityPosts=(await readPosts()).filter(x=>x.slug && x.title);
+const packs=await loadArticlePacks({root,siteRoot,base,categorySlugs:site.categories.map(c=>c.slug)});
+for(const msg of packs.messages) console.log(msg);
+const merged=mergeArticleSources(sanityPosts,packs.posts,message=>console.warn('WARNING: '+message));
+// Demo only when no Sanity project and no published packages are configured.
+const posts=(merged.length || hasSanity ? merged : JSON.parse(await fs.readFile(path.join(root,'content/demo-posts.json'),'utf8')))
+ .sort((a,b)=> new Date(b.date)-new Date(a.date));
 
 function nav(active='') {return `<header class="site-header"><div class="top-strip"><div class="container top-strip-inner"><span>THE SEVEN TRAVEL JOURNAL</span><span class="top-strip-right"><span class="status-dot"></span> LOCAL PERSPECTIVES · MEMORABLE JOURNEYS</span></div></div>
 <div class="container header-main"><a href="${u('/')}" class="brand" aria-label="Seven Travel Guide home"><img src="${asset('seven-travel-logo.png')}" alt="Seven Travel" width="209" height="69"/><span class="brand-line">VIETNAM TRAVEL GUIDE</span></a>
@@ -77,6 +85,7 @@ function homePage(){
   return layout({body:overview+secondaryBar+featured+cats+latest+cta,active:'home',relative:'/',jsonLd:ld});
 }
 function renderPortableText(block){
+  if(block._type==='sevenTip') return `<aside class="editorial-tip"><span>✦ SEVEN TRAVEL TIP</span><p>${esc(block.text||'')}</p></aside>`;
   if(block._type==='image') {const src=block.asset?.url||block.url;return src?`<figure><img loading="lazy" src="${esc(src)}" alt="${esc(block.alt||'Vietnam travel photograph')}"><figcaption>${esc(block.caption||'')}</figcaption></figure>`:'';}
   const children=block.children || [];
   const marks=new Map((block.markDefs||[]).map(m=>[m._key,m]));
@@ -97,18 +106,37 @@ function renderPortableText(block){
   if(block.listItem==='number') return `<p class="bullet-block">${text}</p>`;
   return `<p>${text}</p>`;
 }
-function articleBody(post){const blocks=post.body||[];if(blocks.length===0)return '<p>Article coming soon.</p>';
+function articleBody(post){if(post.bodyHtml) return post.bodyHtml;const blocks=post.body||[];if(blocks.length===0)return '<p>Article coming soon.</p>';
  return blocks.map(b=>{
  if(b._type==='block' || b._type==='image') return renderPortableText(b);
  if(b.type==='lead')return `<p class="article-lead">${esc(b.text)}</p>`;
  if(b.type==='heading')return `<h2>${esc(b.text)}</h2>`;
  if(b.type==='paragraph')return `<p>${esc(b.text)}</p>`;
- if(b.type==='tip')return `<aside class="editorial-tip"><span>✦ THE LOCAL TIP</span><p>${esc(b.text)}</p></aside>`;
+ if(b.type==='tip')return `<aside class="editorial-tip"><span>✦ SEVEN TRAVEL TIP</span><p>${esc(b.text)}</p></aside>`;
  return '';}).join('');}
-function articlePage(post){const cat=getCat(post.category);const related=posts.filter(p=>p.slug!==post.slug).sort((a,b)=>Number(b.category===post.category)-Number(a.category===post.category)).slice(0,3);
- const body=`<div class="container article-page">${breadcrumb([{label:cat.name,href:categoryUrl(cat.slug)},{label:post.title}])}<div class="article-head"><div class="eyebrow"><span class="orange-stroke"></span>${esc(cat.name.toUpperCase())} · TRAVEL GUIDE</div><h1>${esc(post.title)}</h1><p>${esc(post.excerpt || '')}</p><div class="article-byline"><span class="author-avatar">7</span><div><strong>${esc(post.author||'Seven Travel Editorial Team')}</strong><small>${esc(prettyDate(post.date))} <span>·</span> ${esc(post.readingTime||5)} min read</small></div></div></div><figure class="article-hero"><img src="${esc(imageUrl(post))}" alt="${esc(post.imageAlt||post.title)}" width="1440" height="900"/><figcaption>Illustrative artwork · Replace with an original travel photograph before publication.</figcaption></figure><div class="article-content-grid"><aside class="article-sidebar"><div class="sidebar-card"><span>THE JOURNAL</span><h3>A better way to see Vietnam.</h3><p>Explore at your pace with thoughtful local guidance.</p><a href="${u('start-here')}">Plan with confidence ↗</a></div><a class="back-link" href="${categoryUrl(cat.slug)}">← More in ${esc(cat.name)}</a></aside><article class="prose">${articleBody(post)}<div class="article-end"><span>Enjoyed this guide?</span><p>There is always more to discover. Keep exploring the Seven Travel journal.</p><a href="${u('search')}">Browse more stories ↗</a></div></article></div></div><section class="section-pad section-tint related-section"><div class="container">${sectionHeading('KEEP EXPLORING','You might also enjoy','More local insight for your Vietnam journey.')}<div class="article-grid">${related.map(p=>articleCard(p)).join('')}</div></div></section>`;
- const ld=[{'@context':'https://schema.org','@type':'BlogPosting',headline:post.title,description:post.excerpt||'',datePublished:post.date,dateModified:post.date,mainEntityOfPage:canonical(`guides/${post.slug}`),author:{'@type':'Organization',name:post.author||'Seven Travel'},publisher:{'@type':'Organization',name:'Seven Travel'},image:[imageUrl(post).startsWith('http')?imageUrl(post):`${domain}${imageUrl(post)}`]},{'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:[{ '@type':'ListItem',position:1,name:'Home',item:canonical('/')},{'@type':'ListItem',position:2,name:cat.name,item:canonical(`category/${cat.slug}`)},{'@type':'ListItem',position:3,name:post.title,item:canonical(`guides/${post.slug}`)}]}];
- return layout({title:post.title,description:post.excerpt,relative:`guides/${post.slug}`,body,htmlType:'article',jsonLd:ld,image:imageUrl(post).startsWith('http')?imageUrl(post):`${domain}${imageUrl(post)}`});}
+function articleWithAnchors(post){
+ const used=new Set();const toc=[];
+ const html=articleBody(post).replace(/<h([23])(?:\s+[^>]*)?>([\s\S]*?)<\/h\1>/gi,(match,level,inner)=>{
+   const title=strip(inner).replace(/&amp;/g,'&').replace(/&quot;/g,'"').replace(/&#39;/g,"'").trim();
+   let id=title.toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9 -]/g,'').trim().replace(/\s+/g,'-').slice(0,78)||'section';
+   const plain=id;let number=2;while(used.has(id)) id=plain+'-'+number++;
+   used.add(id);toc.push({level:Number(level),title,id});
+   return `<h${level} id="${esc(id)}">${inner}</h${level}>`;
+ });
+ return {html,toc};
+}
+function articlePage(post){
+ const cat=getCat(post.category);
+ const related=posts.filter(p=>p.slug!==post.slug).sort((a,b)=>Number(b.category===post.category)-Number(a.category===post.category)).slice(0,3);
+ const content=articleWithAnchors(post);
+ const tocHtml=content.toc.length?`<nav class="article-toc" aria-label="On this page"><span class="toc-eyebrow">IN THIS GUIDE</span><ol>${content.toc.map(t=>`<li class="toc-level-${t.level}"><a href="#${t.id}">${esc(t.title)}</a></li>`).join('')}</ol></nav>`:'';
+ const credit=post.imageCredit?(post.imageCreditUrl && /^https?:\/\//.test(post.imageCreditUrl)?`Photo: <a href="${esc(post.imageCreditUrl)}" target="_blank" rel="noopener noreferrer">${esc(post.imageCredit)}</a>`:`Photo: ${esc(post.imageCredit)}`):'';
+ const coverCaption=[post.imageCaption?esc(post.imageCaption):'',credit].filter(Boolean).join(' · ');
+ const coverCaptionHtml=coverCaption?`<figcaption>${coverCaption}</figcaption>`:'';
+ const body=`<div class="container article-page">${breadcrumb([{label:cat.name,href:categoryUrl(cat.slug)},{label:post.title}])}<div class="article-head"><div class="eyebrow"><span class="orange-stroke"></span>${esc(cat.name.toUpperCase())} · TRAVEL GUIDE</div><h1>${esc(post.title)}</h1><p>${esc(post.excerpt || '')}</p><div class="article-byline"><span class="author-avatar">7</span><div><strong>${esc(post.author||'Seven Travel Editorial Team')}</strong><small>${esc(prettyDate(post.date))} <span>·</span> ${esc(post.readingTime||5)} min read</small></div></div></div><figure class="article-hero"><img src="${esc(imageUrl(post))}" alt="${esc(post.imageAlt||post.title)}" width="1440" height="900"/>${coverCaptionHtml}</figure><div class="article-content-grid"><aside class="article-sidebar">${tocHtml}<div class="sidebar-card"><span>THE JOURNAL</span><h3>A better way to see Vietnam.</h3><p>Explore at your pace with thoughtful local guidance.</p><a href="${u('start-here')}">Plan with confidence ↗</a></div><a class="back-link" href="${categoryUrl(cat.slug)}">← More in ${esc(cat.name)}</a></aside><article class="prose">${content.html}<div class="article-end"><span>Enjoyed this guide?</span><p>There is always more to discover. Keep exploring the Seven Travel journal.</p><a href="${u('search')}">Browse more stories ↗</a></div></article></div></div><section class="section-pad section-tint related-section"><div class="container">${sectionHeading('KEEP EXPLORING','You might also enjoy','More local insight for your Vietnam journey.')}<div class="article-grid">${related.map(p=>articleCard(p)).join('')}</div></div></section>`;
+ const ld=[{'@context':'https://schema.org','@type':'BlogPosting',headline:post.title,description:post.excerpt||'',datePublished:post.date,dateModified:post.updatedAt||post.date,mainEntityOfPage:canonical(`guides/${post.slug}`),author:{'@type':'Organization',name:post.author||'Seven Travel'},publisher:{'@type':'Organization',name:'Seven Travel'},image:[imageUrl(post).startsWith('http')?imageUrl(post):`${domain}${imageUrl(post)}`]},{'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:[{ '@type':'ListItem',position:1,name:'Home',item:canonical('/')},{'@type':'ListItem',position:2,name:cat.name,item:canonical(`category/${cat.slug}`)},{'@type':'ListItem',position:3,name:post.title,item:canonical(`guides/${post.slug}`)}]}];
+ return layout({title:post.title,description:post.excerpt,relative:`guides/${post.slug}`,body,htmlType:'article',jsonLd:ld,image:imageUrl(post).startsWith('http')?imageUrl(post):`${domain}${imageUrl(post)}`});
+}
 function categoryPage(cat){const subset=posts.filter(p=>p.category===cat.slug);const body=`<section class="category-hero"><div class="container">${breadcrumb([{label:cat.name}])}<div class="eyebrow"><span class="orange-stroke"></span>EXPLORE THE JOURNAL</div><h1>${esc(cat.name)}<span class="orange-dot">.</span></h1><p>${esc(cat.description)}</p><span class="category-count">${subset.length} ${subset.length===1?'ARTICLE':'ARTICLES'}</span></div></section><section class="section-pad"><div class="container"><div class="category-select">${site.categories.map(c=>`<a href="${categoryUrl(c.slug)}" ${c.slug===cat.slug?'class="selected"':''}>${esc(c.name)}</a>`).join('')}</div><div class="article-grid">${subset.length?subset.map(p=>articleCard(p)).join(''):'<p>New articles in this category are coming soon.</p>'}</div></div></section>`;
  return layout({title:cat.name,description:cat.description,relative:`category/${cat.slug}`,body});}
 function searchPage(){const body=`<section class="category-hero search-hero"><div class="container">${breadcrumb([{label:'Search'}])}<div class="eyebrow"><span class="orange-stroke"></span>THE SEVEN TRAVEL JOURNAL</div><h1>Find your next <em>inspiration.</em></h1><p>Search useful tips, places and thoughtful Vietnam itineraries.</p><form class="search-form" id="search-form" action="${u('search')}" method="get"><label for="search-field" class="sr-only">Search articles</label><input type="search" id="search-field" name="q" placeholder="Try 'Ninh Binh', 'train', 'first-time'..." autocomplete="off"><button type="submit">Search ↗</button></form></div></section><section class="container search-results-wrap"><p id="search-summary" class="search-summary">All travel guides</p><div id="search-results" class="article-grid"></div><noscript><p>Please enable JavaScript to search the journal.</p></noscript></section><script>window.SEVEN_SEARCH_CONFIG=${JSON.stringify({index:`${base}/search-index.json`,base})}</script>`;

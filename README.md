@@ -1,3 +1,17 @@
+## NEW: GitHub Article Package Publisher (2026-11-03)
+
+This version **preserves existing Sanity content** and adds independently authored article folders under `content/article-packs/`. Each published folder contains `article.json`, a safe `article.html` fragment, and local photographs. The build merges Sanity posts with article packages, with Sanity winning any duplicate slug unless a package explicitly sets `replaceSanity: true`.
+
+- Beginner guide: `docs/HUONG-DAN-DANG-BAI-ZIP.md`
+- Article format: `content/article-packs/README.md`
+- Future ChatGPT prompt: `docs/MASTER-PROMPT-VI.md`
+- Safe sample: `content/article-packs/_example-hoi-an-relaxed-day` (Draft; never published)
+- Tests: `npm run build`, `npm run test:article-packs`
+
+The existing Sanity Studio project remains connected; no new environment variables are needed. Continue using GitHub Desktop -> Commit -> Push to deploy changes on Vercel. Keep `SITE_LIVE=false` until domain mapping, content, images and canonical URLs are approved.
+
+---
+
 # Seven Travel — Vietnam Travel Guide
 
 **Standalone, English-first, SEO-oriented travel journal** for visitors to Vietnam. Designed using Seven Travel's supplied brand assets, with **Travel Blue #0B3D6D**, **Sunrise Orange #FF8A00**, Nunito headings and Inter body text.

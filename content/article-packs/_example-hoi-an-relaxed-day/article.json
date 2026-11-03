@@ -1,0 +1,16 @@
+{
+  "status": "draft",
+  "title": "A Relaxed Day in Hoi An: An Example Travel Journal Package",
+  "slug": "example-hoi-an-relaxed-day",
+  "excerpt": "An illustrative editorial package showing how to build an attractive travel story with a table of contents, local tips, photos, FAQ, and clear calls to action.",
+  "category": "destinations",
+  "featured": false,
+  "author": "Seven Travel Editorial Team",
+  "publishedAt": "2026-11-03T08:00:00+07:00",
+  "updatedAt": "2026-11-03T08:00:00+07:00",
+  "readingTime": 4,
+  "coverImage": "images/cover.webp",
+  "imageAlt": "Stylized illustrative scene of Hoi An's riverside old town",
+  "imageCaption": "Demonstration artwork only; replace with licensed real photography before publication.",
+  "replaceSanity": false
+}
