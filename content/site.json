@@ -1,0 +1,19 @@
+{
+  "brand": "Seven Travel",
+  "siteTitle": "Vietnam Travel Guide",
+  "tagline": "Go beyond the guidebook.",
+  "description": "Thoughtful travel tips, local insight, and practical guides for exploring Vietnam with confidence.",
+  "publicDomain": "https://www.seventravel.vn",
+  "basePath": "/vietnam-travel-tips",
+  "mainWebsite": "https://www.seventravel.vn/",
+  "consultationUrl": "https://www.seventravel.vn/",
+  "instagramUrl": "",
+  "contactEmail": "",
+  "categories": [
+    {"slug":"travel-essentials","name":"Travel Essentials","short":"Before you go","description":"The practical details that make every journey smoother."},
+    {"slug":"destinations","name":"Destinations","short":"Explore Vietnam","description":"Places, perspectives, and local experiences worth the journey."},
+    {"slug":"culture-food","name":"Culture & Food","short":"Go deeper","description":"Everyday customs, local flavours, and stories that connect us."},
+    {"slug":"itineraries","name":"Itinerary Ideas","short":"Plan a journey","description":"Thoughtful routes and flexible travel inspiration."},
+    {"slug":"travel-updates","name":"Travel Updates","short":"Know before you go","description":"Time-sensitive travel information, carefully checked."}
+  ]
+}

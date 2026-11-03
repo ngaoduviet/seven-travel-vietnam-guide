@@ -1,0 +1,19 @@
+SEVEN TRAVEL — VIETNAM TRAVEL GUIDE
+
+Website chính đã xác minh: React + Vite, deploy qua Vercel.
+Blog mới: dự án riêng, code riêng, GitHub riêng, CMS riêng.
+URL mong muốn: https://www.seventravel.vn/vietnam-travel-tips/
+
+3 VIỆC CẦN LÀM ĐẦU TIÊN:
+1. Mở README.md, mục A để chạy bản demo trên máy tính.
+2. Tạo repo GitHub mới và project Vercel độc lập theo mục B/C.
+3. Tạo tài khoản/project Sanity để quản lý bài viết theo mục D.
+
+CHỈ SAU KHI BLOG CHẠY ỔN ĐỊNH:
+- Bổ sung 2 rewrite vào vercel.json website chính (mục E).
+- Thay bài mẫu, ảnh demo và kiểm tra SEO trước khi bật SITE_LIVE=true.
+- Không cần trộn code blog vào website chính.
+
+LƯU Ý:
+- Site chưa được deploy lên internet, chưa kết nối tài khoản Sanity của bạn.
+- Chưa bật index Google cho nội dung mẫu.

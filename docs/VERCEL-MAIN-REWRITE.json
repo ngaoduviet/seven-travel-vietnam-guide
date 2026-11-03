@@ -1,0 +1,13 @@
+{
+  "description": "Add BOTH rules BEFORE the final /(.*) -> /index.html fallback rule in the existing Seven Travel root project. Replace seven-travel-vietnam-guide.vercel.app with the actual blog deployment hostname. Do not replace the existing /sanpham or other rules.",
+  "add_rewrites": [
+    {
+      "source": "/vietnam-travel-tips",
+      "destination": "https://seven-travel-vietnam-guide.vercel.app/vietnam-travel-tips/"
+    },
+    {
+      "source": "/vietnam-travel-tips/:path*",
+      "destination": "https://seven-travel-vietnam-guide.vercel.app/vietnam-travel-tips/:path*"
+    }
+  ]
+}

@@ -1,0 +1,174 @@
+[
+  {
+    "slug":"first-time-visitor-checklist-vietnam",
+    "title":"The first-timer’s guide to travelling Vietnam with confidence",
+    "excerpt":"What to arrange before departure, what to pack, and the little details that help your first days feel effortless.",
+    "category":"travel-essentials",
+    "image":"/assets/hero-vietnam.svg",
+    "imageAlt":"Illustrated Vietnamese river landscape and limestone mountains",
+    "date":"2026-10-22",
+    "readingTime":6,
+    "featured":true,
+    "author":"Seven Travel Editorial Team",
+    "body":[
+      {"type":"lead","text":"Vietnam is wonderfully varied: lively cities, relaxed river journeys, quiet countryside and mountain landscapes. A little preparation helps you enjoy that contrast without unnecessary stress."},
+      {"type":"heading","text":"Confirm your entry requirements"},
+      {"type":"paragraph","text":"Check passport validity and the official entry or e-visa rules for your nationality well before departure. Regulations can change, so rely on official Vietnamese government sources rather than older travel forum posts."},
+      {"type":"heading","text":"Prepare for more than one climate"},
+      {"type":"paragraph","text":"Northern, central and southern Vietnam can have very different weather at the same time. Pack versatile layers, comfortable walking shoes and a light rain layer, then tailor your suitcase to your actual route and travel dates."},
+      {"type":"heading","text":"Sort out connectivity and payment"},
+      {"type":"paragraph","text":"A roaming plan, eSIM or local SIM can make navigation and communication easier. Carry a little Vietnamese dong for small purchases, while using cards at suitable established businesses. Check bank fees before leaving home."},
+      {"type":"heading","text":"Keep the first day relaxed"},
+      {"type":"paragraph","text":"After a long flight, a gentle walk, a simple meal and an early night are often better than a tightly packed sightseeing schedule. Give yourself time to settle in and enjoy the atmosphere."},
+      {"type":"tip","text":"Seven Travel tip: Keep your hotel address saved offline in both English and Vietnamese for easier taxi transfers."}
+    ]
+  },
+  {
+    "slug":"ninh-binh-day-trip-or-overnight",
+    "title":"Ninh Binh: day trip or overnight stay?",
+    "excerpt":"A practical way to choose how much time to spend among limestone cliffs, waterways and quiet villages.",
+    "category":"destinations",
+    "image":"/assets/ninh-binh.svg",
+    "imageAlt":"Illustrated river and green karst hills in Ninh Binh",
+    "date":"2026-10-19",
+    "readingTime":5,
+    "featured":true,
+    "author":"Seven Travel Editorial Team",
+    "body":[
+      {"type":"lead","text":"Ninh Binh rewards travellers who slow down. The headline sights are beautiful, but the unhurried moments—mist on the river, a village ride, sunset across the fields—are often just as memorable."},
+      {"type":"heading","text":"When a day trip makes sense"},
+      {"type":"paragraph","text":"A day trip from Hanoi can work when your schedule is tight and you want to focus on one boat experience and a limited number of other stops. Be realistic about driving time and avoid adding too many attractions."},
+      {"type":"heading","text":"Why we like an overnight stay"},
+      {"type":"paragraph","text":"Staying overnight creates space for a slower boat trip, a countryside walk and the quieter early morning or late afternoon hours. It also helps reduce the fatigue of returning to Hanoi on the same day."},
+      {"type":"heading","text":"Choosing your experience"},
+      {"type":"paragraph","text":"Trang An, Tam Coc and Van Long offer different settings and operating arrangements. Your ideal choice depends on your interests, weather, seasonal conditions and the rest of your itinerary."},
+      {"type":"tip","text":"Seven Travel tip: When a boat activity is the highlight of your day, schedule it before optional hotel check-in or other flexible stops."}
+    ]
+  },
+  {
+    "slug":"hoi-an-first-time-guide",
+    "title":"Your slow-travel guide to Hoi An",
+    "excerpt":"Lantern-lit lanes, quiet mornings, coastal air and the art of giving Hoi An enough time.",
+    "category":"destinations",
+    "image":"/assets/hoi-an.svg",
+    "imageAlt":"Illustrated old-town houses by the river in Hoi An",
+    "date":"2026-10-15",
+    "readingTime":5,
+    "featured":false,
+    "author":"Seven Travel Editorial Team",
+    "body":[
+      {"type":"lead","text":"Hoi An is easy to fall for, especially when you explore beyond the busiest evening hours. The historic streets are compact, but the town’s atmosphere deserves more than a quick photo stop."},
+      {"type":"heading","text":"Start early in the old town"},
+      {"type":"paragraph","text":"An early walk offers softer light and a quieter view of Hoi An’s architecture. Take time to notice assembly halls, traditional houses and daily life alongside the main visitor routes."},
+      {"type":"heading","text":"Leave time for the countryside"},
+      {"type":"paragraph","text":"If your schedule allows, explore nearby villages or rural landscapes. A short journey beyond the historic center creates a different perspective on the area."},
+      {"type":"heading","text":"Plan around the weather"},
+      {"type":"paragraph","text":"Central Vietnam has a distinct rainy season and sometimes experiences flooding. Check short-term weather and local access conditions, particularly for travel in late autumn and winter."},
+      {"type":"tip","text":"Seven Travel tip: Enjoy the lanterns in the evening, but plan your detailed heritage sightseeing for the morning when streets are typically more relaxed."}
+    ]
+  },
+  {
+    "slug":"two-weeks-in-vietnam-itinerary",
+    "title":"Two weeks in Vietnam: a considered north-to-south route",
+    "excerpt":"An adaptable 14-day travel rhythm designed to balance headline highlights with time to actually enjoy them.",
+    "category":"itineraries",
+    "image":"/assets/vietnam-itinerary.svg",
+    "imageAlt":"Illustrated coastline and mountains in Vietnam",
+    "date":"2026-10-10",
+    "readingTime":7,
+    "featured":true,
+    "author":"Seven Travel Editorial Team",
+    "body":[
+      {"type":"lead","text":"Fourteen days give you a wonderful introduction to Vietnam, but every transfer has a cost in time and energy. The secret is choosing a manageable number of stops rather than trying to fit every destination into one holiday."},
+      {"type":"heading","text":"Days 1–4: Hanoi and the northern landscapes"},
+      {"type":"paragraph","text":"Begin with Hanoi’s culture and food, then dedicate time to a scenic excursion such as a bay cruise or Ninh Binh. If you want to enjoy both, consider how much time you are comfortable spending in transit."},
+      {"type":"heading","text":"Days 5–9: Central Vietnam"},
+      {"type":"paragraph","text":"Continue to Hue for imperial heritage, then travel toward Hoi An via Da Nang. This section rewards a relaxed pace and offers a rich mix of history, local cuisine and town life."},
+      {"type":"heading","text":"Days 10–14: Ho Chi Minh City and the south"},
+      {"type":"paragraph","text":"Finish with the energy of Ho Chi Minh City, then choose a Mekong experience or extra free time according to your interests. Check domestic flight schedules and allow realistic buffers between transfers."},
+      {"type":"tip","text":"Seven Travel tip: A private itinerary should reflect your preferred pace, not simply include the maximum number of places possible."}
+    ]
+  },
+  {
+    "slug":"hue-da-nang-heritage-train-guide",
+    "title":"The scenic railway journey from Hue to Da Nang",
+    "excerpt":"What to expect from the coastal rail journey over the Hai Van Pass—and how to fit it into a seamless itinerary.",
+    "category":"destinations",
+    "image":"/assets/heritage-train.svg",
+    "imageAlt":"Illustrated passenger train in Vietnam’s coastal mountains",
+    "date":"2026-10-07",
+    "readingTime":5,
+    "featured":false,
+    "author":"Seven Travel Editorial Team",
+    "body":[
+      {"type":"lead","text":"The railway between Hue and Da Nang is memorable for its dramatic coastal landscapes. For many visitors, the journey itself is as interesting as the destination."},
+      {"type":"heading","text":"Choose your departure thoughtfully"},
+      {"type":"paragraph","text":"Timetables and service arrangements can change. Confirm the exact train, departure time, carriage type, luggage rules and station transfer before committing to a day’s sightseeing plan."},
+      {"type":"heading","text":"Make the transfer part of the experience"},
+      {"type":"paragraph","text":"The train is an enjoyable way to move between cities, but it still requires time to check out, reach the station, board and transfer onward at arrival. Give the day enough breathing room."},
+      {"type":"tip","text":"Seven Travel tip: Decide in advance who is responsible for meeting your group at the arrival station and helping with onward transport."}
+    ]
+  },
+  {
+    "slug":"vietnam-cash-cards-and-currency",
+    "title":"Money in Vietnam: cash, cards and everyday payments",
+    "excerpt":"Simple payment habits that make markets, cafés, restaurants and local transport easier to navigate.",
+    "category":"travel-essentials",
+    "image":"/assets/hanoi.svg",
+    "imageAlt":"Illustrated city skyline in Vietnam",
+    "date":"2026-10-05",
+    "readingTime":4,
+    "featured":false,
+    "author":"Seven Travel Editorial Team",
+    "body":[
+      {"type":"lead","text":"Vietnam uses the Vietnamese dong (VND). A mix of cards and a sensible amount of local cash is usually the easiest approach for visitors."},
+      {"type":"heading","text":"Keep some small notes handy"},
+      {"type":"paragraph","text":"Cash remains useful for small purchases and local shops. Look carefully at note denominations, which can be easy to mix up when you first arrive."},
+      {"type":"heading","text":"Use cards where practical"},
+      {"type":"paragraph","text":"Hotels and established businesses often accept cards, though acceptance and fees vary. Check the payment method before using a service and review your bank’s international transaction charges."},
+      {"type":"heading","text":"Currency exchange and ATM basics"},
+      {"type":"paragraph","text":"Use reputable providers, check the displayed exchange rate and fees, and keep receipts for larger exchanges. Avoid carrying more cash than you need for the day."}
+    ]
+  },
+  {
+    "slug":"lan-ha-bay-cruise-packing-guide",
+    "title":"What to pack for a one-night cruise in Lan Ha Bay",
+    "excerpt":"A light, practical packing guide for a relaxing overnight escape among the limestone islands.",
+    "category":"travel-essentials",
+    "image":"/assets/lan-ha-bay.svg",
+    "imageAlt":"Illustrated scenic cruise bay and limestone mountains",
+    "date":"2026-10-03",
+    "readingTime":4,
+    "featured":false,
+    "author":"Seven Travel Editorial Team",
+    "body":[
+      {"type":"lead","text":"A bay cruise feels more comfortable when you bring only what you need. Pack with the weather, onboard activities and your cruise operator’s guidance in mind."},
+      {"type":"heading","text":"The essentials"},
+      {"type":"paragraph","text":"Bring identification requested by the operator, a small overnight bag, comfortable shoes and appropriate clothes for your season. A lightweight extra layer is useful for the deck in cooler or windy weather."},
+      {"type":"heading","text":"For time on the water"},
+      {"type":"paragraph","text":"Sun protection, a refillable water bottle and a waterproof pouch for small belongings can be helpful. Check whether your sailing includes kayaking, swimming or other activities before packing equipment."},
+      {"type":"tip","text":"Seven Travel tip: Keep medication, travel documents and valuables with you rather than in luggage that may be stored separately during transfers."}
+    ]
+  },
+  {
+    "slug":"vietnamese-food-etiquette-for-travellers",
+    "title":"Vietnamese dining: a gentle introduction for visitors",
+    "excerpt":"From shared plates to street-food stalls, a few small customs make local meals more enjoyable.",
+    "category":"culture-food",
+    "image":"/assets/vietnam-food.svg",
+    "imageAlt":"Illustrated Vietnamese bowl with herbs and noodles",
+    "date":"2026-10-01",
+    "readingTime":4,
+    "featured":false,
+    "author":"Seven Travel Editorial Team",
+    "body":[
+      {"type":"lead","text":"Eating is one of the best ways to connect with Vietnam. Meals can be lively, informal and built around sharing. Curiosity matters far more than mastering every custom."},
+      {"type":"heading","text":"Expect shared dishes"},
+      {"type":"paragraph","text":"At many family-style meals, dishes are placed in the middle of the table. Take modest portions and watch how your hosts serve food, as customs vary by setting and region."},
+      {"type":"heading","text":"Street food with confidence"},
+      {"type":"paragraph","text":"Look for busy stalls with food prepared fresh, and choose places that match your comfort level. If you have food allergies or dietary restrictions, communicate them clearly before ordering."},
+      {"type":"heading","text":"Be open to regional flavours"},
+      {"type":"paragraph","text":"Dishes change from north to south. Even something familiar may be prepared differently in each region, which is part of the pleasure of travelling across Vietnam."}
+    ]
+  }
+]

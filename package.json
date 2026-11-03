@@ -1,0 +1,16 @@
+{
+  "name": "seven-travel-vietnam-guide",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Independent SEO-first Vietnam Travel Guide for Seven Travel with Sanity CMS support",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "npm run build && npx --yes serve dist -l 3000",
+    "preview": "npm run build && python3 -m http.server 3000 -d dist",
+    "test": "node scripts/test.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
